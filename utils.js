@@ -1,6 +1,4 @@
 const cp = require("child_process");
-const { Z_UNKNOWN } = require("zlib");
-
 
 function exec(command) {
     return new Promise((resolve, reject) => cp.exec(command, (error, stdout, stderr) => {
@@ -70,5 +68,22 @@ function formatUptime(startupTime) {
     return str;
 }
 
+function checkCompatibility() {
+    switch (process.platform) {
+        case "linux":
+            return;
+        case "win32":
+            throw "Ewwww Micro$oft software";
+        case "darwin":
+            throw "applefag BTFO!";
+        default:
+            if (process.platform.includes("bsd")) {
+                throw "BSD schizo using Discord? really?";
+            }
+            throw "Unsupported platform";
 
-module.exports = { exec, getLSBDistroName, getKernelVersion, getStartupTime, formatUptime };
+    }
+}
+
+
+module.exports = { exec, getLSBDistroName, getKernelVersion, getStartupTime, formatUptime, checkCompatibility };

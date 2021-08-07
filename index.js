@@ -39,5 +39,6 @@ function setActivity() {
     });
 }
 
+utils.checkCompatibility();
 client.login({ clientId: '873578750128840744' });
 console.log('starting...');
