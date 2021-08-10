@@ -2,8 +2,7 @@
   "name": "discord-os-rpc",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Matic Babnik",
   "license": "MIT",
   "dependencies": {

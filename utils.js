@@ -23,6 +23,8 @@ async function getDistroName() {
             return getLSBDistroName();
         case 'win32':
             return getWinDistroName();
+        case 'darwin':
+            return getMacDistroName();
     }
 }
 
@@ -34,6 +36,15 @@ async function getLSBDistroName() {
     } catch {
         return "unknown";
     }
+}
+
+async function getMacDistroName() {
+    const version = (await exec('sw_vers -productVersion'))
+        .split(/\./g)[1];
+
+    const distroName = ["PumaCheetah", "Jaguar", "Panther", "Tiger", "Leopard", "Snow Leopard", "Lion", "Mountain Lion", "Mavericks", "Yosemite", "El Capitan", "Sierra", "High Sierra", "Mojave", "Catalina", "Big Sur", "Monterey"]
+    [version - 1];
+    return distroName;
 }
 
 async function getWinDistroName() {
@@ -52,6 +63,8 @@ async function getKernelVersion() {
             return getLinuxKernelVersion();
         case 'win32':
             return getWinKernelVersion();
+        case 'darwin':
+            return getMacKernelVersion();
     }
 }
 
@@ -65,13 +78,23 @@ async function getLinuxKernelVersion() {
     }
 }
 
+async function getMacKernelVersion() {
+    try {
+        const kernel = await exec('uname -r');
+
+        return kernel?.trim() ?? 'UNKNOWN';
+    } catch {
+        return "unknown";
+    }
+}
+
 async function getWinKernelVersion() {
     try {
         const info = await exec('systeminfo /FO CSV /NH');
 
         return info?.split('","')[2].split(' ')[0] ?? 'UNKNOWN';
     } catch {
-        return "unknown"
+        return "unknown";
     }
 }
 
@@ -81,6 +104,10 @@ async function getStartupTime() {
             return getLinuxStartupTime();
         case 'win32':
             return getWinStartupTime();
+        case 'darwin':
+            return getMacStartupTime();
+        default:
+            return new Date();
     }
 }
 
@@ -92,6 +119,16 @@ async function getLinuxStartupTime() {
 
     } catch {
         return new Date();
+    }
+}
+
+async function getMacStartupTime() {
+    try {
+        const bootTime = await exec('sysctl -n kern.boottime');
+
+        return new Date(bootTime.replace(/{.*}/));
+    } catch {
+        return "unknown";
     }
 }
 
@@ -136,9 +173,8 @@ function checkCompatibility() {
     switch (process.platform) {
         case "linux":
         case "win32":
-            return;
         case "darwin":
-            throw "applefag BTFO!";
+            return;
         default:
             if (process.platform.includes("bsd")) {
                 throw "BSD schizo using Discord? really?";
@@ -151,6 +187,11 @@ function checkCompatibility() {
 function getButtons() {
     switch (process.platform) {
         case 'linux':
+            return [
+                { label: "Install Arch", url: "https://wiki.archlinux.org/title/Installation_guide" },
+                { label: "or Manjaro", url: "https://manjaro.org/download/#kde-plasma" }
+            ];
+        default:
             return [
                 { label: "Install Arch", url: "https://wiki.archlinux.org/title/Installation_guide" },
                 { label: "or Manjaro", url: "https://manjaro.org/download/#kde-plasma" }
