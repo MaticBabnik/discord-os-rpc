@@ -11,6 +11,9 @@ switch (process.platform) {
     case 'win32':
         rpcId = '874371922568282162';
         break;
+    case 'darwin':
+        rpcId = '873578750128840744';
+        break;
 }
 
 rpc.register(rpcId);
@@ -56,6 +59,8 @@ function getImageKey() {
             return 'arch';
         case 'win32':
             return 'win';
+        case 'darwin':
+            return 'arch';
     }
 }
 
@@ -65,6 +70,8 @@ function getImageText() {
             return 'Arch linux';
         case 'win32':
             return 'Windows';
+        case 'darwin':
+            return 'Mac OS X';
     }
 }
 
@@ -75,6 +82,8 @@ function getDetailsKernelLabel() {
     }
     return '';
 }
+
+console.log(process.platform)
 
 client.login({ clientId: rpcId });
 console.log('starting...');
