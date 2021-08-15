@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {},
-  "maintainers": ["Matic Babnik<matic.babnik@outlook.com>","marwuint","jakobkordez"],
+  "maintainers": [
+    "Matic Babnik<matic.babnik@outlook.com>",
+    "marwuint",
+    "jakobkordez"
+  ],
   "license": "MIT",
   "dependencies": {
     "discord-rpc": "^4.0.1"
