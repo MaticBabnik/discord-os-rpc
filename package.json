@@ -1,9 +1,9 @@
 {
   "name": "discord-os-rpc",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {},
-  "author": "Matic Babnik",
+  "maintainers": ["Matic Babnik<matic.babnik@outlook.com>","marwuint","jakobkordez"],
   "license": "MIT",
   "dependencies": {
     "discord-rpc": "^4.0.1"
