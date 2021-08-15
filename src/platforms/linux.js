@@ -8,14 +8,17 @@ const DISTRO_RESOLVER = {
     //pop is at the top since it is based on ubuntu, which is based on debian
 
     'pop': { text: "Pop! OS", logo: "pop" },
+    'mint': { text: "Mint", logo: "mint" },
 
     'artix': { text: "Artix", logo: "artix" },
     'manjaro': { text: "Manjaro", logo: "manjaro" },
     'ubuntu': { text: "Ubuntu", logo: "ubuntu" },
-    'fedora': { text: "Fedora", logo: "fedora" },
 
     'arch': { text: "Arch", logo: "arch" },
     'debian': { text: "Debian", logo: "debian" },
+    'fedora': { text: "Fedora", logo: "fedora" },
+    'suse': { text: "SUSE", logo: "suse" },
+    'slackware': { text: "Slackware", logo: "slackware" },
     'gentoo': { text: "Gentoo", logo: "gentoo" },
 
 }
