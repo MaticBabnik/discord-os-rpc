@@ -41,8 +41,8 @@ module.exports = {
             name: await getOSName(),
             kernel: getKernelVer(),
             bootTimestamp: await getBootTime(),
-            text:"TODO", //TODO idk what to put here
-            logo:"apple1" //TODO request more logos
+            text:"apple", //TODO fixme
+            logo:"apple" //TODO more logos?
         }
     }
 };

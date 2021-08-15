@@ -49,7 +49,7 @@ module.exports = {
             kernel: await getVersion(),
             bootTimestamp: await getLastBootupTime(),
             text: winVer.split(' ').slice(0, 2).join(' '),
-            logo: 'windows' //TODO request more logos, detect 7/8/8.1/10
+            logo: 'windows' //TODO detect 7/8/10/11
         }
     }
 };
