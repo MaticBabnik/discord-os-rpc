@@ -23,6 +23,13 @@ async function getVersion() {
     return info?.match(/\d+\.\d+\.\d+/)[0] ?? 'UNKNOWN';
 }
 
+// Gets major version and returns appropriate logo
+function getLogoByVersion(version) {
+    const major = version.split('.')[0];
+    if (['7', '8', '10', '11'].includes(major)) return major;
+    return 'windows';
+}
+
 // On Win 10 gets 4 digit ver (like 20H2, 1909, ...)
 async function getDisplayVersion() {
     const info = await p$`(Get-ItemProperty "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion").DisplayVersion`;
@@ -44,12 +51,13 @@ module.exports = {
     rpcId: "874305329079386122",
     async init() {
         const winVer = await getWindowsVersion() + ' ' + await getDisplayVersion();
+        const version = await getVersion();
         return {
             name: winVer,
-            kernel: await getVersion(),
+            kernel: version,
             bootTimestamp: await getLastBootupTime(),
             text: winVer.split(' ').slice(0, 2).join(' '),
-            logo: 'windows' //TODO detect 7/8/10/11
+            logo: getLogoByVersion(version),
         }
     }
 };
