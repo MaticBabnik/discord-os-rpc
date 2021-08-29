@@ -36,6 +36,7 @@ function setStatus(client,data) {
         largeImageKey: data.logo,
         largeImageText: data.text,
         instance: false,
+        buttons: require('../buttons.json'),
     })
 }
 

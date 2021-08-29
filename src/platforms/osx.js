@@ -1,7 +1,6 @@
 const { $ } = require('../utils');
 
 //anything older than sierra is prolly irrelavant...
-//TODO verify this still works?
 const OS_NAMES = ["Cheetah", "Puma", "Jaguar",
     "Panther", "Tiger", "Leopard", "Snow Leopard",
     "Lion", "Mountain Lion", "Mavericks", "Yosemite",
@@ -18,14 +17,14 @@ async function getOSName() {
 }
 
 async function getKernelVer() {
-    const kernel = await exec('uname -r');
+    const kernel = await $`uname -r`;
 
     return kernel?.trim() ?? 'UNKNOWN';
 }
 
 async function getBootTime() {
     try {
-        const bootTime = await exec('sysctl -n kern.boottime');
+        const bootTime = await $`sysctl -n kern.boottime`;
 
         return new Date(bootTime.replace(/{.*}/));
     } catch {
@@ -39,10 +38,10 @@ module.exports = {
     async init() {
         return {
             name: await getOSName(),
-            kernel: getKernelVer(),
+            kernel: await getKernelVer(),
             bootTimestamp: await getBootTime(),
-            text:"apple", //TODO fixme
-            logo:"apple" //TODO more logos?
+            text:"Apple", //TODO fixme
+            logo:"macos" //TODO more logos?
         }
     }
 };
